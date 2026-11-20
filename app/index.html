@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sunset Ledger — GTA VI Trophy Guide &amp; Tracker</title>
+<meta name="description" content="All 55 GTA VI trophies with a plain-English guide for each, a 3-stage roadmap to the platinum, missables, and a tracker that saves your progress.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="hero">
+  <div class="hero-inner">
+    <p class="kicker">Grand Theft Auto VI &middot; PS5 &middot; Platinum roadmap</p>
+    <h1>Sunset Ledger</h1>
+    <p class="tagline">Every trophy in Leonida, in the order to earn it — with the one missable flagged before you can lose it.</p>
+    <div class="audit-strip" id="auditStrip">
+      <span><strong>55</strong> trophies</span>
+      <span><strong>6</strong> sources</span>
+      <span>read <strong>20–21 Nov 2026</strong></span>
+      <span>Difficulty <strong>4/10</strong></span>
+      <span>~<strong>200 h</strong></span>
+      <span><strong>1</strong> playthrough</span>
+      <span><strong>0</strong> online</span>
+      <span><strong>0</strong> glitched</span>
+    </div>
+    <div class="progress-panel">
+      <div class="progress-head">
+        <span class="earned-big"><strong id="earnedCount">0</strong>/55 earned</span>
+        <span class="psn" id="psnPoints">0 / 1,230 PSN points</span>
+        <span class="grades" id="gradeCounts"></span>
+      </div>
+      <div class="progress-bar" role="progressbar" aria-label="Trophies earned" aria-valuemin="0" aria-valuemax="55" aria-valuenow="0" id="progressBarWrap">
+        <div class="progress-fill" id="progressFill" style="width:0%"></div>
+      </div>
+      <div class="progress-actions">
+        <label class="spoiler-toggle"><input type="checkbox" id="spoilerToggle" checked> <span>Hide spoilers (28 hidden trophies)</span></label>
+        <div class="io-buttons">
+          <button id="demoBtn" type="button" title="Preview with 13 trophies earned (in-memory only, nothing saved)">Try demo 13/55</button>
+          <button id="exportBtn" type="button">Export JSON</button>
+          <button id="importBtn" type="button">Import JSON</button>
+          <input type="file" id="importFile" accept="application/json" hidden>
+          <button id="resetBtn" type="button" class="danger">Reset</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs" role="tablist" aria-label="Guide sections">
+  <button role="tab" aria-selected="true" data-tab="tracker" id="tab-tracker">Tracker</button>
+  <button role="tab" aria-selected="false" data-tab="roadmap" id="tab-roadmap">Roadmap</button>
+  <button role="tab" aria-selected="false" data-tab="missables" id="tab-missables">Missables</button>
+  <button role="tab" aria-selected="false" data-tab="sources" id="tab-sources">Sources</button>
+</nav>
+
+<main>
+  <section id="panel-tracker" role="tabpanel" aria-labelledby="tab-tracker">
+    <div class="filters" id="filters">
+      <input type="search" id="searchBox" placeholder="Search trophies…" aria-label="Search trophies">
+      <select id="kindFilter" aria-label="Filter by type">
+        <option value="">All types</option>
+        <option value="story">Story</option>
+        <option value="crime">Crime</option>
+        <option value="activity">Activity</option>
+        <option value="collectible">Collectible</option>
+      </select>
+      <select id="gradeFilter" aria-label="Filter by grade">
+        <option value="">All grades</option>
+        <option value="platinum">Platinum</option>
+        <option value="gold">Gold</option>
+        <option value="silver">Silver</option>
+        <option value="bronze">Bronze</option>
+      </select>
+      <select id="earnedFilter" aria-label="Filter by earned">
+        <option value="">Earned &amp; unearned</option>
+        <option value="earned">Earned only</option>
+        <option value="unearned">Unearned only</option>
+      </select>
+      <select id="flagFilter" aria-label="Filter by flag">
+        <option value="">All flags</option>
+        <option value="missable">Missable / at risk</option>
+        <option value="hidden">PSN-hidden</option>
+        <option value="unconfirmed">Unconfirmed</option>
+        <option value="disputed">Sources differ</option>
+      </select>
+      <select id="sortSelect" aria-label="Sort trophies">
+        <option value="roadmap">Sort: roadmap order</option>
+        <option value="name">Sort: name A–Z</option>
+        <option value="grade">Sort: grade (P→B)</option>
+      </select>
+    </div>
+    <p class="result-count" id="resultCount"></p>
+    <div class="grid" id="trackerGrid"></div>
+  </section>
+
+  <section id="panel-roadmap" role="tabpanel" aria-labelledby="tab-roadmap" hidden>
+    <div class="roadmap-intro">
+      <h2>The road to the platinum</h2>
+      <p>Three stages, about 200 hours. Play the story first, then clean up the checklist, then mop up strangers and stragglers. Everything you do before the ending already counts toward the 100% checklist — it just is not viewable until after the story.</p>
+      <p class="save-tip"><strong>Save discipline:</strong> there is no mission replay. Keep a separate manual save at the start and end of every chapter (10 saves), then rotate the remaining 5 for free-roam cleanup. Cheats disable trophies and saving — keep them off your platinum save.</p>
+    </div>
+    <div id="roadmapStages"></div>
+  </section>
+
+  <section id="panel-missables" role="tabpanel" aria-labelledby="tab-missables" hidden>
+    <div id="missablesContent"></div>
+  </section>
+
+  <section id="panel-sources" role="tabpanel" aria-labelledby="tab-sources" hidden>
+    <div id="sourcesContent"></div>
+  </section>
+</main>
+
+<footer>
+  <p>Sunset Ledger — an unofficial fan guide. GTA VI is unreleased at the time of writing (19 Nov 2026); trophy conditions come from the sources listed on the Sources tab and may still be refined after launch. Not affiliated with Rockstar Games or Sony.</p>
+  <p>Data: <code>app/data/trophies.json</code> · Progress saves locally in your browser (localStorage) — nothing leaves your device.</p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
